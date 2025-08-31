@@ -1,42 +1,423 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ===== Design tokens ===== */
+:root{
+  --brand-bg:#eef7f6;
+  --ink:#2b3a42;
+  --deep:#023639;
+  --teal:#056676;
+  --teal-ghost:#aef0fd;
+  --teal-soft:#60c0b8;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+/* ===== Page scaffold ===== */
+html,body,#root{height:100%;}
+body{
+  margin:0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background:var(--brand-bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.main{flex:1;}
+
+/* ===== Generic containers ===== */
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  width:100%;
+  padding:0 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* ===== Navbar ===== */
+.navbar{
+  padding:1rem 2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--teal);
+  box-shadow:0 4px 15px rgba(5,102,118,.15);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+@media(max-width:600px){ .navbar{ padding:1rem; } }
+
+.nav-brand{
+  display:flex;
+  align-items:center;
+  gap:0;                /* no extra gap, only logo */
+  font-weight:700;
+  font-size:1.6rem;
+  color:#d0f0fd;
+}
+@media(max-width:600px){ .nav-brand{ font-size:1.3rem; } }
+
+.nav-links{ display:flex; gap:1.8rem; }
+@media(max-width:600px){ .nav-links{ gap:1rem; } }
+.nav-links a{
+  font-weight:600;
+  font-size:1rem;
+  color:#d0f0fd;
+  padding:8px 12px;
+  border-radius:8px;
+  position:relative;
+  transition:.3s;
+}
+.nav-links a:hover,
+.nav-links a.active{
+  background:#04393b;
+  color:var(--teal-ghost);
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  bottom:0; left:0;
+  width:0; height:2px;
+  background:var(--teal-ghost);
+  transition:width .3s;
+}
+.nav-links a:hover::after{ width:100%; }
+
+/* ===== Hero ===== */
+.hero{
+  background:linear-gradient(135deg,#60c0b8 0%,#b2e3e0 100%);
+  padding:6rem 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:80vh;
+  border-radius:0 0 90px 90px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23023639' fill-opacity='0.05'/%3E%3C/svg%3E");
+  opacity:.3;
+  z-index:0;
+}
+
+/* hero layout container */
+.hero-grid{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  z-index:1;
+}
+@media(max-width:900px){
+  .hero{
+    flex-direction:column;
+    border-radius:0 0 60px 60px;
+    padding:4rem 1rem;
+    min-height:auto;
   }
-  to {
-    transform: rotate(360deg);
+  .hero-grid{
+    flex-direction:column;
+    text-align:center;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+.hero-text{ max-width:600px; color:var(--deep); }
+.hero-text h1{
+  font-size:3.2rem;
+  margin:0 0 1rem;
+  font-weight:900;
+  letter-spacing:-1px;
+  line-height:1.1;
+  text-shadow:0 2px 4px rgba(2,54,57,.1);
+}
+.hero-text p{
+  font-size:1.3rem;
+  line-height:1.5;
+  margin:0 0 2rem;
+  font-weight:500;
+}
+@media(max-width:900px){
+  .hero-text{ max-width:100%; }
+  .hero-text h1{ font-size:2.5rem; }
+  .hero-text p { font-size:1.1rem; }
+}
+@media(max-width:480px){ .hero-text h1{ font-size:2rem; } }
+
+.hero-cta-link{ text-decoration:none; }
+.hero-cta{
+  background:var(--deep);
+  color:#d0f0fd;
+  font-weight:700;
+  padding:15px 42px;
+  border-radius:50px;
+  font-size:1.1rem;
+  box-shadow:0 8px 15px rgba(2,54,57,.56);
+  transition:.3s;
+  display:inline-block;
+  position:relative;
+  overflow:hidden;
+}
+.hero-cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--teal);
+  z-index:-1;
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .4s ease;
+}
+.hero-cta:hover::before{ transform:scaleX(1); transform-origin:left; }
+.hero-cta:hover{ box-shadow:0 12px 24px rgba(5,102,118,.6); }
+
+/* hero image right side */
+.hero-image{
+  max-width:clamp(180px, 45vw, 420px);
+  border-radius:0;
+  box-shadow:none;
+  filter:drop-shadow(0 4px 12px rgba(2,54,57,.25));
+  animation:floatY 6s ease-in-out infinite;
+}
+@keyframes floatY{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-15px) } }
+@media(max-width:900px){
+  .hero-image{ margin-top:2.7rem; width:100%; max-width:400px; }
+}
+
+/* small decorative DNA icons */
+.dna-icon{
+  position:absolute;
+  width:100px; height:150px;
+  opacity:.1;
+  z-index:0;
+  background:url("data:image/svg+xml,%3Csvg width='100' height='150' viewBox='0 0 100 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 5v10M30 25v10M70 25v10M50 45v10M30 65v10M70 65v10M50 85v10M30 105v10M70 105v10M50 125v10' stroke='%23023639' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M50 5c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0zM50 45c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0zM50 85c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0zM50 125c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0z' fill='none' stroke='%23023639' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat;
+  animation:dnaFloat 8s ease-in-out infinite;
+}
+@keyframes dnaFloat{
+  0%{ transform:translateY(0) rotate(0deg); }
+  25%{ transform:translateY(-10px) rotate(5deg); }
+  50%{ transform:translateY(0) rotate(0deg); }
+  75%{ transform:translateY(10px) rotate(-5deg); }
+  100%{ transform:translateY(0) rotate(0deg); }
+}
+
+/* ===== Services ===== */
+.services{
+  padding:4rem 1rem;
+  background:#f0fbfb;
+  position:relative;
+  overflow:hidden;
+}
+.services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.3;
+  z-index:0;
+  background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23056676' fill-opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Section title */
+.section-title{
+  font-weight:900;
+  font-size:2.8rem;
+  color:var(--teal);
+  margin:0 auto 2rem;
+  text-align:center;
+  position:relative;
+  display:inline-block;
+  padding:0 20px;
+}
+.section-title::before,
+.section-title::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:50px; height:3px;
+  background:linear-gradient(90deg,var(--teal),transparent);
+}
+.section-title::before{ left:-50px; }
+.section-title::after {
+  right:-50px;
+  background:linear-gradient(90deg,transparent,var(--teal));
+}
+@media(max-width:768px){
+  .section-title{ font-size:2.2rem; }
+  .section-title::before,
+  .section-title::after{ width:30px; }
+  .section-title::before{ left:-30px; }
+  .section-title::after{ right:-30px; }
+}
+@media(max-width:480px){
+  .section-title{ font-size:1.8rem; }
+  .section-title::before,
+  .section-title::after{ width:20px; }
+  .section-title::before{ left:-20px; }
+  .section-title::after{ right:-20px; }
+}
+
+/* Service table */
+.bt-table{ width:100%; border-collapse:collapse; margin:1rem 0; }
+.bt-table th,
+.bt-table td{ padding:12px 15px; text-align:left; border-bottom:1px solid #ddd; }
+.bt-table th{
+  background:var(--teal);
+  color:#fff;
+  font-weight:600;
+  position:sticky;
+  top:0;
+}
+.bt-table tr:nth-child(even){ background:#f2f9f9; }
+.bt-table tr:hover{ background:#e0f2f1; }
+
+/* ===== Contact ===== */
+.contact{
+  background:#fff;
+  color:#333;
+  padding:6rem 2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+.contact h2{ font-size:2.5rem; margin:0 0 2rem; }
+.contact form{
+  width:100%;
+  max-width:600px;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+.contact input,
+.contact textarea{
+  padding:1rem;
+  font-size:1rem;
+  border-radius:8px;
+  border:1px solid #ccc;
+  resize:vertical;
+}
+.contact button{
+  background:#60c0b8;
+  color:#fff;
+  border:none;
+  padding:1rem;
+  font-size:1rem;
+  border-radius:8px;
+  cursor:pointer;
+  transition:background .3s;
+}
+.contact button:hover{ background:#4ba69e; }
+
+/* ===== Footer ===== */
+.footer{
+  background:var(--teal);
+  color:#d0f0fd;
+  padding:2rem 1rem;
+  text-align:center;
+  font-weight:500;
+  margin-top:auto;
+  position:relative;
+  overflow:hidden;
+}
+.footer::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:3px;
+  background:linear-gradient(90deg,#60c0b8,#b2e3e0);
+}
+
+/* ===== Table & image responsiveness ===== */
+.bt-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+@media(max-width:767px){
+  .bt-table thead th{ position:static; }  /* no sticky TH on phones */
+}
+
+/* ===== Fine-tune text & spacing on small screens ===== */
+@media(max-width:599px){
+  .hero-text h1{ font-size:1.9rem; }
+  .hero-text p { font-size:1rem;  }
+  .hero-image  { max-width:60vw;  }
+}
+
+/* ===== Extra roomy on very wide screens ===== */
+@media(min-width:1600px){
+  .hero         { padding-inline:4rem; }
+  .hero-text h1 { font-size:3.8rem;    }
+}
+
+/* ===== Universal fluid images (logos, etc.) ===== */
+img, svg{ max-width:100%; height:auto; }
+.nav-logo{
+  height:clamp(28px,6vw,48px);
+  width:auto;
+  display:block;
+}
+
+/* ------------------------------------------------------------ */
+/* PHONE VIEW – each table row becomes a clean card ------------ */
+@media(max-width:767px){
+
+  /* hide the thead row */
+  .bt-table thead{ display:none; }
+
+  /* turn table elements into blocks so they stack */
+  .bt-table,
+  .bt-table tbody,
+  .bt-table tr,
+  .bt-table td{ display:block; width:100%; }
+
+  /* spacing / card look for each row */
+  .bt-table tr{
+    margin:0 0 1.4rem;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    padding:.5rem 0;
+  }
+
+  /* each cell becomes a block:   label (bold)  then value */
+  .bt-table td{
+    padding:.7rem 1rem;
+    border:none;
+    font-size:.95rem;
+  }
+
+  /* add the label above, using data-label */
+  .bt-table td::before{
+    content:attr(data-label);
+    display:block;
+    font-weight:600;
+    color:var(--teal);
+    margin-bottom:.2rem;
   }
 }
+/* =================================================================== */
+/* 📱  MOBILE NAVBAR FIX – keep logo + text, put links on next line    */
+/* =================================================================== */
+@media (max-width: 600px){
 
-.card {
-  padding: 2em;
-}
+  /* stack brand then links */
+  .navbar{
+    flex-direction:column;          /* logo/text on 1st line, links on 2nd */
+    align-items:flex-start;
+    padding:0.75rem 1rem;
+  }
 
-.read-the-docs {
-  color: #888;
+  .nav-brand{
+    margin-bottom:0.4rem;           /* little gap before the links */
+  }
+
+  .brand-text{                      /* shrink text so it never overruns */
+    font-size:1.1rem;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:space-around;   /* spread Home / Services / Contact */
+    gap:0.5rem;                     /* tighter gap than desktop */
+  }
 }
