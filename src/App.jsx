@@ -2,23 +2,11 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
-
+import servicesData from "./servicesData.json";
 import heroLogo from "./assets/PhyloBandits_logo.png";          // big illustrated hero graphic
 import logo from "./assets/PhyloBandits_logo_NOTEXT.png";       // small icon for navbar
+import MoleculeBackground from "./components/MoleculeBackground";
 
-/* -------------------------- data & variants -------------------------- */
-const servicesData = [
-  { serviceArea: "Microbiome & Metagenomics", whatsIncluded: "Taxonomic profiling, functional annotation, pathway mapping, resistance genes", tools: "FastQC, MetaPhlAn, HUMAnN3, MEGAN, CARD-RGI", clients: "Biotech, aquaculture, gut health, agriculture" },
-  { serviceArea: "Genome Annotation", whatsIncluded: "Prokaryotic genome annotation, SNP/indel calling, comparative genomics", tools: "RAST, PATRIC, PROKKA, EnsemblVEP", clients: "Microbiologists, viral research groups" },
-  { serviceArea: "Functional Enrichment", whatsIncluded: "GO/KEGG/COG annotation, pathway enrichment, gene function predictions", tools: "DAVID, g:Profiler, Enrichr, Blast2GO", clients: "Academics, pharma, nutraceutical studies" },
-  { serviceArea: "Transcriptome (RNA-seq)", whatsIncluded: "Differential gene expression, clustering, heatmaps, enrichment analysis", tools: "STAR/Hisat2, featureCounts, DESeq2, EdgeR", clients: "Drug development, stress response, expression studies" },
-  { serviceArea: "Molecular Docking", whatsIncluded: "Protein-ligand docking, protein-protein interaction, visualization", tools: "AutoDock, PyMOL, SwissDock, HADDOCK", clients: "Drug screening, nutraceutical testing" },
-  { serviceArea: "Systems Biology Modeling", whatsIncluded: "Metabolic network simulation, rate law fitting, pathway dynamics modeling", tools: "COPASI", clients: "Synthetic biology, product R&D, mechanistic modeling" },
-  { serviceArea: "BLAST & Genomic Comparison", whatsIncluded: "Gene identification, homology searches, ortholog/paralog analysis", tools: "BLAST, MAUVE, UGENE", clients: "Bacterial & viral strain characterization" },
-  { serviceArea: "Data Visualization", whatsIncluded: "Heatmaps, PCA, volcano plots, KEGG maps, Sankey plots", tools: "R, GraphPad, Cytoscape", clients: "Research reports, publications, startup dashboards" },
-  { serviceArea: "Proposal/Publication Support", whatsIncluded: "Bioinfo sections for papers, grants, and theses", tools: "Word, LaTeX, Mendeley", clients: "Students, academics, startups" },
-  { serviceArea: "Training & Workshops", whatsIncluded: "Custom training on metagenomics, RNA-seq, docking, systems biology", tools: "Galaxy, RStudio, Jupyter, COPASI", clients: "Colleges, research institutes, biotech firms" }
-];
 
 const tableVariants = {
   hidden: { opacity: 0 },
@@ -47,6 +35,8 @@ export default function App() {
 
   return (
     <>
+      <MoleculeBackground />
+
       {/* Toast notifications */}
       <Toaster />
 
@@ -84,7 +74,6 @@ export default function App() {
             PhyloBandits
           </motion.span>
         </a>
-
 
         <div className="nav-links">
           <a href="#home"     onClick={(e)=>{e.preventDefault(); scrollTo("home");}}>Home</a>
@@ -168,50 +157,57 @@ export default function App() {
         {/* ============ SERVICES ============ */}
         <section id="services" className="services" aria-labelledby="services-heading">
           <div className="container">
-            <motion.h2
-              id="services-heading"
-              className="section-title"
+            {/* Section header with title + subtitle */}
+            <motion.div
+              className="services-header"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              Our Bioinformatics Services
-            </motion.h2>
+              <h2 id="services-heading" className="section-title">
+                Our Bioinformatics Services
+              </h2>
+              {/* <p className="section-subtitle">
+                From Raw Data to Actionable Biological Insights
+              </p> */}
+            </motion.div>
 
-            <motion.div initial="hidden" animate="visible" variants={tableVariants}>
-              {/* ------- responsive table wrapper ------- */}
-              <div className="bt-table-wrapper">
-                <table className="bt-table">
-                  <thead>
-                    <motion.tr
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.5 }}
-                    >
-                      <th>Service Area</th>
-                      <th>What's Included</th>
-                      <th>Tools/Software</th>
-                      <th>Ideal Clients</th>
-                    </motion.tr>
-                  </thead>
-                  <tbody>
-                    {servicesData.map((s,i)=>(  
-                      <motion.tr
-                        key={i}
-                        variants={rowVariants}
-                        whileHover="hover"
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        <td data-label="Service Area"><strong>{s.serviceArea}</strong></td>
-                        <td data-label="What's Included">{s.whatsIncluded}</td>
-                        <td data-label="Tools / Software">{s.tools}</td>
-                        <td data-label="Ideal Clients">{s.clients}</td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            {/* Cards grid */}
+            <motion.div
+              className="services-grid"
+              initial="hidden"
+              animate="visible"
+              variants={tableVariants}
+            >
+              {servicesData.map((s, i) => (
+                <motion.div
+                  key={i}
+                  className="service-card"
+                  variants={rowVariants}
+                  whileHover="hover"
+                  style={{ borderTop: `4px solid ${s.color}` }}
+                >
+                  <h3>
+                    <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                      {s.icon}
+                    </span>
+                    {s.serviceArea}
+                  </h3>
+
+                  <p>
+                    <strong style={{ color: s.color }}>What we do:</strong>{" "}
+                    {s.whatsIncluded}
+                  </p>
+                  <p>
+                    <strong style={{ color: s.color }}>Key Tools:</strong>{" "}
+                    {s.tools}
+                  </p>
+                  <p>
+                    <strong style={{ color: s.color }}>Applications:</strong>{" "}
+                    {s.clients}
+                  </p>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </section>
