@@ -3,9 +3,12 @@ import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 import servicesData from "./servicesData.json";
-import heroLogo from "./assets/PhyloBandits_logo.png";          // big illustrated hero graphic
-import logo from "./assets/PhyloBandits_logo_NOTEXT.png";       // small icon for navbar
+//import heroLogo from "./assets/PhyloBandits_logo.png";          // big illustrated hero graphic
+import heroLogo from "./assets/PhyloBandits_Logo_Transparent_Cut.png"
+//import logo from "./assets/PhyloBandits_logo_NOTEXT.png";       // small icon for navbar
+import logo from "./assets/PhyloBandits_Logo_Transparent_Cut.png";
 import MoleculeBackground from "./components/MoleculeBackground";
+import "./styles/buttons.css";
 
 
 const tableVariants = {
@@ -91,68 +94,66 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="dna-icon" style={{ top: "10%", left: "5%" }} />
-          <div className="dna-icon" style={{ bottom: "10%", right: "5%" }} />
+          <div className="container hero-center">
+            {/* Small top logo */}
+            <motion.img
+              src={heroLogo}
+              alt="PhyloBandits Logo"
+              className="hero-logo"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            />
 
-          <div className="container hero-grid">
-            <motion.div
-              className="hero-text"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              aria-label="Hero text introduction"
+            {/* Heading */}
+            <motion.h1
+              className="hero-heading"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
             >
-              <motion.h1
-                animate={{
-                  textShadow:[
-                    "0 2px 4px rgba(2,54,57,.1)",
-                    "0 4px 8px rgba(2,54,57,.2)",
-                    "0 2px 4px rgba(2,54,57,.1)"
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                Advanced Bioinformatics Services for Life Sciences
-              </motion.h1>
+              Advanced Bioinformatics{" "}
+              <span className="accent"> Services for Life Sciences</span>
+            </motion.h1>
 
-              <motion.p
-                animate={{ opacity: [0.9, 1, 0.9] }}
-                transition={{ duration: 4, repeat: Infinity }}
+            {/* Subtitle */}
+            <motion.p
+              className="hero-subtitle"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              From microbiome analysis to molecular docking, actionable insights
+              delivered with precision.
+            </motion.p>
+
+            {/* CTA buttons */}
+            <motion.div
+              className="hero-buttons"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <a
+                href="#services"
+                className="btn-primary"
+                onClick={(e) => { e.preventDefault(); scrollTo("services"); }}
               >
-                Comprehensive bioinformatics solutions from microbiome analysis
-                to molecular docking and systems biology modeling.
-              </motion.p>
+                View Services
+              </a>
 
               <a
-                className="hero-cta-link"
-                href="#services"
-                onClick={(e)=>{ e.preventDefault(); scrollTo("services"); }}
+                href="#contact"
+                className="btn-secondary"
+                onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}
               >
-                <motion.span
-                  className="hero-cta"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  View Services
-                </motion.span>
+                Contact Us
               </a>
             </motion.div>
 
-            {/* hero-side logo */}
-            <motion.img
-              className="hero-image"
-              src={heroLogo}           /* big illustrated hero graphic */
-              alt="PhyloBandits hero logo"
-              loading="lazy"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            />
           </div>
         </motion.section>
+
 
         {/* ============ SERVICES ============ */}
         <section id="services" className="services" aria-labelledby="services-heading">

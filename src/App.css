@@ -247,9 +247,9 @@ body {
 
 /* ===== Footer ===== */
 .footer {
-  background:rgba(5,102,118,0.9); /* translucent */
+  background:rgba(2, 47, 54, 0.9); /* translucent */
   backdrop-filter:blur(4px);
-  color:#d0f0fd;
+  color:#02374d;
   padding:2rem 1rem;
   text-align:center;
   font-weight:500;
@@ -259,7 +259,7 @@ body {
 }
 .footer::before {
   content:""; position:absolute; top:0; left:0; right:0;
-  height:3px; background:linear-gradient(90deg,#60c0b8,#b2e3e0);
+  height:3px; background:linear-gradient(90deg,#014e48,#01504b);
 }
 
 /* ===== Tables (for older services view) ===== */
@@ -299,4 +299,105 @@ body {
 }
 
 
+
+.hero-center {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-logo {
+  width: clamp(250px, 25vw, 300px);
+  margin: 0 auto 2rem;
+  display: block;
+}
+
+
+.hero-heading {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-heading .accent {
+  color: var(--teal);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.btn-primary:hover { background: #04565f; }
+
+.btn-secondary {
+  border: 2px solid var(--teal);
+  color: var(--teal);
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.btn-secondary:hover {
+  background: var(--teal);
+  color: #fff;
+}
+/* Fix tsparticles canvas so it stays behind everything */
+/* Ensure tsparticles background never blocks content */
+#tsparticles,
+#tsparticles canvas {
+  pointer-events: none !important;
+  z-index: -1 !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.tsparticles-canvas-el {
+  pointer-events: none !important;
+  z-index: -1 !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero,
+.hero-center,
+.hero-buttons {
+  position: relative;
+  z-index: 10 !important;
+}
+
+.services,
+.services-header,
+.services-grid,
+.service-card {
+  position: relative;
+  z-index: 10 !important;
+}
 

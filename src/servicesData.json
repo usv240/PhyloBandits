@@ -4,79 +4,79 @@
     "whatsIncluded": "Taxonomic profiling, functional annotation, pathway mapping, resistance genes",
     "tools": "FastQC, MetaPhlAn, HUMAnN3, MEGAN, CARD-RGI",
     "clients": "Biotech, aquaculture, gut health, agriculture",
-    "icon": "🦠",
-    "color": "#16a34a"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Genome Annotation",
     "whatsIncluded": "Prokaryotic genome annotation, SNP/indel calling, comparative genomics",
     "tools": "RAST, PATRIC, PROKKA, EnsemblVEP",
     "clients": "Microbiologists, viral research groups",
-    "icon": "🧬",
-    "color": "#2563eb"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Functional Enrichment",
     "whatsIncluded": "GO/KEGG/COG annotation, pathway enrichment, gene function predictions",
     "tools": "DAVID, g:Profiler, Enrichr, Blast2GO",
     "clients": "Academics, pharma, nutraceutical studies",
-    "icon": "💉",
-    "color": "#22c55e"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Transcriptome (RNA-seq)",
     "whatsIncluded": "Differential gene expression, clustering, heatmaps, enrichment analysis",
     "tools": "STAR/Hisat2, featureCounts, DESeq2, EdgeR",
     "clients": "Drug development, stress response, expression studies",
-    "icon": "📊",
-    "color": "#ec4899"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Molecular Docking",
     "whatsIncluded": "Protein-ligand docking, protein-protein interaction, visualization",
     "tools": "AutoDock, PyMOL, SwissDock, HADDOCK",
     "clients": "Drug screening, nutraceutical testing",
-    "icon": "💊",
-    "color": "#f97316"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Systems Biology Modeling",
     "whatsIncluded": "Metabolic network simulation, rate law fitting, pathway dynamics modeling",
     "tools": "COPASI",
     "clients": "Synthetic biology, product R&D, mechanistic modeling",
-    "icon": "🔗",
-    "color": "#7c3aed"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "BLAST & Genomic Comparison",
     "whatsIncluded": "Gene identification, homology searches, ortholog/paralog analysis",
     "tools": "BLAST, MAUVE, UGENE",
     "clients": "Bacterial & viral strain characterization",
-    "icon": "🔍",
-    "color": "#0ea5e9"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Data Visualization",
     "whatsIncluded": "Heatmaps, PCA, volcano plots, KEGG maps, Sankey plots",
     "tools": "R, GraphPad, Cytoscape",
     "clients": "Research reports, publications, startup dashboards",
-    "icon": "📈",
-    "color": "#eab308"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Proposal/Publication Support",
     "whatsIncluded": "Bioinfo sections for papers, grants, and theses",
     "tools": "Word, LaTeX, Mendeley",
     "clients": "Students, academics, startups",
-    "icon": "📝",
-    "color": "#f59e0b"
+    "icon": "",
+    "color": "#023639"
   },
   {
     "serviceArea": "Training & Workshops",
     "whatsIncluded": "Custom training on metagenomics, RNA-seq, docking, systems biology",
     "tools": "Galaxy, RStudio, Jupyter, COPASI",
     "clients": "Colleges, research institutes, biotech firms",
-    "icon": "🎓",
-    "color": "#10b981"
+    "icon": "",
+    "color": "#023639"
   }
 ]

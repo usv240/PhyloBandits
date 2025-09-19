@@ -1,0 +1,31 @@
+/* ===== Buttons (standalone design system) ===== */
+.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s ease;
+  text-align: center;
+}
+.btn-primary:hover {
+  background: #04565f;
+}
+
+.btn-secondary {
+  border: 2px solid var(--teal);
+  color: var(--teal);
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s ease;
+  text-align: center;
+}
+.btn-secondary:hover {
+  background: var(--teal);
+  color: #fff;
+}
