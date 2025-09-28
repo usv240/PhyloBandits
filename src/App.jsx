@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
@@ -8,6 +8,7 @@ import heroLogo from "./assets/PhyloBandits_Logo_Transparent_Cut.png"
 //import logo from "./assets/PhyloBandits_logo_NOTEXT.png";       // small icon for navbar
 import logo from "./assets/PhyloBandits_Logo_Transparent_Cut.png";
 import MoleculeBackground from "./components/MoleculeBackground";
+import ServiceModal from "./components/ServiceModal";
 import "./styles/buttons.css";
 
 
@@ -35,6 +36,18 @@ const scrollTo = (id) => {
 
 export default function App() {
   const contactRef = useRef(null);
+  const [selectedService, setSelectedService] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleServiceClick = (service) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedService(null);
+  };
 
   return (
     <>
@@ -183,30 +196,23 @@ export default function App() {
               {servicesData.map((s, i) => (
                 <motion.div
                   key={i}
-                  className="service-card"
+                  className="service-card clickable"
                   variants={rowVariants}
                   whileHover="hover"
                   style={{ borderTop: `4px solid ${s.color}` }}
+                  onClick={() => handleServiceClick(s)}
                 >
                   <h3>
-                    <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
-                      {s.icon}
-                    </span>
                     {s.serviceArea}
                   </h3>
 
-                  <p>
-                    <strong style={{ color: s.color }}>What we do:</strong>{" "}
-                    {s.whatsIncluded}
+                  <p className="service-preview">
+                    {s.shortDescription}
                   </p>
-                  <p>
-                    <strong style={{ color: s.color }}>Key Tools:</strong>{" "}
-                    {s.tools}
-                  </p>
-                  <p>
-                    <strong style={{ color: s.color }}>Applications:</strong>{" "}
-                    {s.clients}
-                  </p>
+                  
+                  <div className="service-card-footer">
+                    <span className="click-hint">Click to learn more →</span>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -267,6 +273,13 @@ export default function App() {
       >
         &copy; {new Date().getFullYear()} PhyloBandits
       </motion.footer>
+
+      {/* ============ SERVICE MODAL ============ */}
+      <ServiceModal 
+        service={selectedService}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </>
   );
 }

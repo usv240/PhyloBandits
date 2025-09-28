@@ -1,82 +1,151 @@
 [
   {
+    "serviceArea": "Genomics & Comparative Analysis",
+    "shortDescription": "Comparative genomics, AMR detection, and strain analysis for clinical surveillance.",
+    "project": "High-resolution AMR surveillance in Salmonella (multi-strain)",
+    "objective": "Build a comparative genomics pipeline to detect AMR determinants, SNP/indels, and lineage signatures across 50–200 isolates.",
+    "data": [
+      "Draft/complete genomes (Illumina/ONT hybrid where available)",
+      "Public references from NCBI/ENA; AMR gene DBs (e.g., CARD)"
+    ],
+    "workflow": [
+      "Assembly QC → hybrid assembly (if applicable)",
+      "Annotation: RAST/RASTtk, Prokka",
+      "Homology & AMR gene search: BLAST, CARD",
+      "Pangenome/ortholog mapping & comparative views (incl. presence/absence, core vs. accessory)",
+      "Variant calling: SNP/indel against reference; lineage clustering"
+    ],
+    "tools": "RAST/RASTtk, Prokka, BLAST, CARD",
+    "deliverables": [
+      "Strain phylogeny + AMR gene heatmap",
+      "List of novel/rare AMR loci & SNP clusters with annotations",
+      "Interactive comparative report (HTML) and methods appendix (reproducible)"
+    ],
+    "kpis": [
+      "Recall/precision vs. curated AMR markers; per-gene coverage thresholds",
+      "Turnaround time per genome; reproducibility (pipeline versioning)"
+    ],
+    "whatsIncluded": "Comparative genomics pipeline, AMR detection, strain phylogeny, interactive reports",
+    "clients": "Clinical labs, surveillance programs, pharmaceutical research",
+    "icon": "",
+    "color": "#666666"
+  },
+  {
+    "serviceArea": "Transcriptomics & Functional Insights", 
+    "shortDescription": "RNA-seq analysis, differential expression, and pathway enrichment studies.",
+    "project": "RNA-seq & pathway mapping for stress-response (plant or human model)",
+    "objective": "Quantify differential expression and identify pathway-level drivers under stress/perturbation, followed by network visualization.",
+    "data": [
+      "RNA-seq (paired-end); public baselines where relevant (GEO/SRA)"
+    ],
+    "workflow": [
+      "Alignment: STAR; quantification; QC",
+      "Differential expression: DESeq2 (shrinkage estimates, robust stats)",
+      "Enrichment: g:Profiler (GO/KEGG/Reactome)",
+      "Network/visualization: Cytoscape (apps for enrichment maps)"
+    ],
+    "tools": "STAR, DESeq2, g:Profiler, Cytoscape",
+    "deliverables": [
+      "DE tables (normalized counts, logFC, FDR)",
+      "Pathway/GO maps, volcano/PCA/heatmaps",
+      "Publication-ready figures + narrative interpretation"
+    ],
+    "kpis": [
+      "Alignment rate, library complexity, p-value calibration, replication concordance (R²)",
+      "Enrichment FDR control"
+    ],
+    "whatsIncluded": "RNA-seq analysis, differential expression, pathway enrichment, network visualization",
+    "clients": "Academic research, drug development, agricultural studies",
+    "icon": "",
+    "color": "#666666"
+  },
+  {
     "serviceArea": "Microbiome & Metagenomics",
-    "whatsIncluded": "Taxonomic profiling, functional annotation, pathway mapping, resistance genes",
-    "tools": "FastQC, MetaPhlAn, HUMAnN3, MEGAN, CARD-RGI",
-    "clients": "Biotech, aquaculture, gut health, agriculture",
+    "shortDescription": "Microbiome profiling, taxonomic analysis, and functional characterization.",
+    "project": "Shotgun gut microbiome profiling ± intervention (e.g., probiotic, diet)",
+    "objective": "Resolve taxa to species/SGB level; quantify pathway shifts (SCFA production, bile acid metabolism) and AMR load pre/post intervention.",
+    "data": [
+      "Shotgun metagenomes (5–10 GB/sample), optional metatranscriptomes",
+      "Public cohorts for benchmarking (e.g., HMP2/IBDMDB)"
+    ],
+    "workflow": [
+      "Taxonomic profiling: MetaPhlAn (v4); strain/SGB resolution",
+      "Functional profiling: HUMAnN 3",
+      "Novel profiler alternatives (comparative): sylph (ANI-aware species detection) as sensitivity check",
+      "Resistance gene screening: CARD-RGI",
+      "Diversity metrics, differential abundance; confounder modeling"
+    ],
+    "tools": "MetaPhlAn3/4, HUMAnN3, sylph, CARD-RGI",
+    "deliverables": [
+      "Species/pathway abundance matrices; differential pathway report",
+      "AMR gene burden dashboard; effect sizes with confidence intervals",
+      "Reproducible workflow (Snakemake/Nextflow)"
+    ],
+    "kpis": [
+      "Read mappability, LOD for rare taxa, cross-run reproducibility",
+      "Pathway consistency"
+    ],
+    "whatsIncluded": "Shotgun metagenomics, taxonomic profiling, functional analysis, AMR screening",
+    "clients": "Clinical microbiome research, probiotic companies, nutrition studies",
     "icon": "",
-    "color": "#023639"
+    "color": "#666666"
   },
   {
-    "serviceArea": "Genome Annotation",
-    "whatsIncluded": "Prokaryotic genome annotation, SNP/indel calling, comparative genomics",
-    "tools": "RAST, PATRIC, PROKKA, EnsemblVEP",
-    "clients": "Microbiologists, viral research groups",
+    "serviceArea": "Molecular Modeling & Drug Discovery",
+    "shortDescription": "Virtual screening, molecular docking, and drug target analysis.",
+    "project": "In-silico screening + mechanism hypotheses for target X (e.g., AChE, kinases)",
+    "objective": "Prioritize small molecules (natural or synthetic) via docking + post-scoring; propose binding hypotheses and experimental assays.",
+    "data": [
+      "Target structures (PDB or high-quality AlphaFold where needed)",
+      "Library: vendor/natural compound set (10³–10⁵)"
+    ],
+    "workflow": [
+      "Docking & VS: AutoDock Vina (parallel, rescoring tiers)",
+      "Protein–protein / integrative docking when needed: HADDOCK (data-driven restraints)",
+      "Visualization & figure prep: PyMOL",
+      "Optional ML triage for ADMET/BBB and PAINS filtering"
+    ],
+    "tools": "AutoDock Vina, HADDOCK, PyMOL",
+    "deliverables": [
+      "Ranked hit list with binding poses & interaction fingerprints",
+      "Off-target risk screen; suggested wet-lab assays (IC₅₀/SPR/DSF)",
+      "Methods pack (parameters, seeds) for repro"
+    ],
+    "kpis": [
+      "Enrichment factor vs. decoys, pose RMSD vs. co-crystal (where available)",
+      "Hit-rate in follow-up assays"
+    ],
+    "whatsIncluded": "Molecular docking, virtual screening, binding analysis, drug discovery pipeline",
+    "clients": "Pharmaceutical companies, drug discovery labs, academic research",
     "icon": "",
-    "color": "#023639"
+    "color": "#666666"
   },
   {
-    "serviceArea": "Functional Enrichment",
-    "whatsIncluded": "GO/KEGG/COG annotation, pathway enrichment, gene function predictions",
-    "tools": "DAVID, g:Profiler, Enrichr, Blast2GO",
-    "clients": "Academics, pharma, nutraceutical studies",
+    "serviceArea": "Systems Biology & AI-Driven Modeling",
+    "shortDescription": "AI-driven multi-omics integration and predictive biomarker discovery.",
+    "project": "Multi-omics biomarker discovery & mechanism modeling (oncology example)",
+    "objective": "Integrate transcriptome/proteome/metabolome with pathway dynamics to discover predictive biomarkers and simulate interventions.",
+    "data": [
+      "Public & proprietary cohorts (e.g., TCGA Pan-Cancer Atlas, CPTAC)"
+    ],
+    "workflow": [
+      "Network & kinetics: COPASI for ODE modeling, parameter estimation, sensitivity analysis",
+      "ML stack: scikit-learn (feature selection, classical models), TensorFlow/PyTorch (deep models)",
+      "Model governance: nested CV, calibration, SHAP-style explanations; external validation on held-out cohorts"
+    ],
+    "tools": "COPASI, scikit-learn, TensorFlow, PyTorch",
+    "deliverables": [
+      "Predictive signature (gene/metabolite panel) with locked pipeline",
+      "Mechanistic model (rate-law diagram + simulatable SBML)",
+      "Clinical-style report (ROC/PR, decision curves), and deployment-ready notebooks"
+    ],
+    "kpis": [
+      "AUC/APS, calibration slope, external-cohort generalization",
+      "Global/local sensitivity, parameter identifiability; runtime + reproducibility"
+    ],
+    "whatsIncluded": "Multi-omics integration, AI/ML modeling, biomarker discovery, systems modeling",
+    "clients": "Biotech companies, clinical research, precision medicine initiatives",
     "icon": "",
-    "color": "#023639"
-  },
-  {
-    "serviceArea": "Transcriptome (RNA-seq)",
-    "whatsIncluded": "Differential gene expression, clustering, heatmaps, enrichment analysis",
-    "tools": "STAR/Hisat2, featureCounts, DESeq2, EdgeR",
-    "clients": "Drug development, stress response, expression studies",
-    "icon": "",
-    "color": "#023639"
-  },
-  {
-    "serviceArea": "Molecular Docking",
-    "whatsIncluded": "Protein-ligand docking, protein-protein interaction, visualization",
-    "tools": "AutoDock, PyMOL, SwissDock, HADDOCK",
-    "clients": "Drug screening, nutraceutical testing",
-    "icon": "",
-    "color": "#023639"
-  },
-  {
-    "serviceArea": "Systems Biology Modeling",
-    "whatsIncluded": "Metabolic network simulation, rate law fitting, pathway dynamics modeling",
-    "tools": "COPASI",
-    "clients": "Synthetic biology, product R&D, mechanistic modeling",
-    "icon": "",
-    "color": "#023639"
-  },
-  {
-    "serviceArea": "BLAST & Genomic Comparison",
-    "whatsIncluded": "Gene identification, homology searches, ortholog/paralog analysis",
-    "tools": "BLAST, MAUVE, UGENE",
-    "clients": "Bacterial & viral strain characterization",
-    "icon": "",
-    "color": "#023639"
-  },
-  {
-    "serviceArea": "Data Visualization",
-    "whatsIncluded": "Heatmaps, PCA, volcano plots, KEGG maps, Sankey plots",
-    "tools": "R, GraphPad, Cytoscape",
-    "clients": "Research reports, publications, startup dashboards",
-    "icon": "",
-    "color": "#023639"
-  },
-  {
-    "serviceArea": "Proposal/Publication Support",
-    "whatsIncluded": "Bioinfo sections for papers, grants, and theses",
-    "tools": "Word, LaTeX, Mendeley",
-    "clients": "Students, academics, startups",
-    "icon": "",
-    "color": "#023639"
-  },
-  {
-    "serviceArea": "Training & Workshops",
-    "whatsIncluded": "Custom training on metagenomics, RNA-seq, docking, systems biology",
-    "tools": "Galaxy, RStudio, Jupyter, COPASI",
-    "clients": "Colleges, research institutes, biotech firms",
-    "icon": "",
-    "color": "#023639"
+    "color": "#666666"
   }
 ]

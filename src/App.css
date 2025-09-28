@@ -233,7 +233,7 @@ body {
   box-shadow:0 4px 12px rgba(0,0,0,.08);
   transition:transform 0.3s ease, box-shadow 0.3s ease;
   text-align:left;
-  border-left: 3px solid var(--bio-green);
+  border-left: 3px solid #666666;
 }
 .service-card h3 {
   color: var(--bio-green);
@@ -744,9 +744,10 @@ body {
 }
 
 .service-preview {
-  color: #666;
+  color: var(--tech-blue);
   font-size: 0.95rem;
   line-height: 1.5;
+  font-weight: 450;
 }
 
 .service-card-footer {
