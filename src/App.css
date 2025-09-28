@@ -272,15 +272,15 @@ body {
 .contact input,
 .contact textarea {
   padding:1rem; font-size:1rem;
-  border-radius:8px; border:2px solid rgba(76, 175, 80, 0.3);
+  border-radius:8px; border:2px solid #CCCCCC;
   resize:vertical;
   transition: border-color 0.3s ease;
 }
 .contact input:focus,
 .contact textarea:focus {
   outline: none;
-  border-color: var(--bio-green);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  border-color: #999999;
+  box-shadow: 0 0 0 3px rgba(153, 153, 153, 0.1);
 }
 .contact button {
   background: var(--tech-blue);
