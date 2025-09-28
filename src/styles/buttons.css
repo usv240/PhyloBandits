@@ -1,6 +1,6 @@
 /* ===== Buttons (standalone design system) ===== */
 .btn-primary {
-  background: var(--teal);
+  background: var(--bio-green);
   color: #fff;
   padding: 14px 28px;
   border-radius: 8px;
@@ -9,14 +9,17 @@
   display: inline-block;
   transition: 0.3s ease;
   text-align: center;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 .btn-primary:hover {
-  background: #04565f;
+  background: var(--tech-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
 }
 
 .btn-secondary {
-  border: 2px solid var(--teal);
-  color: var(--teal);
+  border: 2px solid var(--bio-green);
+  color: var(--bio-green);
   padding: 12px 26px;
   border-radius: 8px;
   font-weight: 600;
@@ -26,6 +29,9 @@
   text-align: center;
 }
 .btn-secondary:hover {
-  background: var(--teal);
+  background: var(--tech-blue);
+  border-color: var(--tech-blue);
   color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
 }
