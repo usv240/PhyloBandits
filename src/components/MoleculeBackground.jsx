@@ -27,17 +27,17 @@ export default function MoleculeBackground() {
         fpsLimit: 60,
         particles: {
           number: { 
-            value: 45, 
+            value: 25, // Reduced number of particles
             density: { enable: true, area: 800 } 
           },
           color: { 
-            value: ["#A8A8A8", "#B8B8B8", "#9A9A9A", "#AAAAAA"]
+            value: ["#C0C0C0", "#D0D0D0", "#E0E0E0"] // Adjusted color intensity
           },
           shape: { 
             type: "circle"
           },
           opacity: { 
-            value: 0.6,
+            value: 0.5,
             animation: {
               enable: true,
               speed: 0.4,
@@ -46,7 +46,7 @@ export default function MoleculeBackground() {
             }
           },
           size: {
-            value: { min: 2, max: 4 },
+            value: { min: 2, max: 3 }, // Slightly smaller particles
             animation: {
               enable: true,
               speed: 0.8,
@@ -57,8 +57,8 @@ export default function MoleculeBackground() {
           links: {
             enable: true,
             distance: 140,
-            color: "#999999",
-            opacity: 0.5,
+            color: "#BBBBBB", // Adjusted link color
+            opacity: 0.4,
             width: 1.2,
             triangles: {
               enable: true,
@@ -67,7 +67,7 @@ export default function MoleculeBackground() {
           },
           move: {
             enable: true,
-            speed: 0.8,
+            speed: 0.6, // Reduced movement speed
             direction: "none",
             random: false,
             straight: false,

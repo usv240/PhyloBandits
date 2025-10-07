@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 import servicesData from "./servicesData.json";
+import { getServiceIconAsset } from "./utils/iconMap";
 //import heroLogo from "./assets/PhyloBandits_logo.png";          // big illustrated hero graphic
 import heroLogo from "./assets/PhyloBandits_Logo_Transparent_Cut.png"
 //import logo from "./assets/PhyloBandits_logo_NOTEXT.png";       // small icon for navbar
@@ -203,6 +204,12 @@ export default function App() {
                   onClick={() => handleServiceClick(s)}
                 >
                   <h3>
+                    <img
+                      src={getServiceIconAsset(s.serviceArea)}
+                      alt=""
+                      aria-hidden="true"
+                      className="service-list-icon"
+                    />
                     {s.serviceArea}
                   </h3>
 
@@ -236,16 +243,25 @@ export default function App() {
               const msgBox = form.querySelector(".form-message");
               msgBox.textContent = "";
 
-              try{
-                await fetch("https://formsubmit.co/ajax/ujwalv098@gmail.com",{
-                  method:"POST",
-                  headers:{ Accept:"application/json" },
-                  body:data
+              try {
+                // Send to first email
+                await fetch("https://formsubmit.co/ajax/ujwalv098@gmail.com", {
+                  method: "POST",
+                  headers: { Accept: "application/json" },
+                  body: data
                 });
+
+                // Send to second email
+                await fetch("https://formsubmit.co/ajax/desaigururaj06@gmail.com", {
+                  method: "POST",
+                  headers: { Accept: "application/json" },
+                  body: data
+                });
+
                 msgBox.textContent = "✅ Message sent successfully!";
                 msgBox.style.color = "#056676";
                 form.reset();
-              }catch(err){
+              } catch (err) {
                 msgBox.textContent = "❌ Failed to send. Please try again.";
                 msgBox.style.color = "crimson";
               }

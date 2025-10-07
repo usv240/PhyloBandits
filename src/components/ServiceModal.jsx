@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/ServiceModal.css';
 import logo from '../assets/PhyloBandits_Logo_Transparent_Cut.png';
+import { sectionIcons } from '../utils/iconMap';
 
 const ServiceModal = ({ service, isOpen, onClose }) => {
   if (!isOpen || !service) return null;
@@ -34,6 +35,7 @@ const ServiceModal = ({ service, isOpen, onClose }) => {
             {/* Row 1: Objective + Deliverables */}
             <div className="service-card-item objective-card">
               <div className="card-header">
+                <span className="card-icon" aria-hidden="true">{React.createElement(sectionIcons['Objective'])}</span>
                 <h3>Objective</h3>
               </div>
               <div className="card-content">
@@ -43,6 +45,7 @@ const ServiceModal = ({ service, isOpen, onClose }) => {
 
             <div className="service-card-item deliverables-card">
               <div className="card-header">
+                <span className="card-icon" aria-hidden="true">{React.createElement(sectionIcons['Deliverables'])}</span>
                 <h3>Deliverables</h3>
               </div>
               <div className="card-content">
@@ -57,6 +60,7 @@ const ServiceModal = ({ service, isOpen, onClose }) => {
             {/* Row 2: Project + Workflow + KPIs */}
             <div className="service-card-item project-card">
               <div className="card-header">
+                <span className="card-icon" aria-hidden="true">{React.createElement(sectionIcons['Project'])}</span>
                 <h3>Project</h3>
               </div>
               <div className="card-content">
@@ -73,6 +77,7 @@ const ServiceModal = ({ service, isOpen, onClose }) => {
 
             <div className="service-card-item workflow-card">
               <div className="card-header">
+                <span className="card-icon" aria-hidden="true">{React.createElement(sectionIcons['Workflow / Tools'])}</span>
                 <h3>Workflow / Tools</h3>
               </div>
               <div className="card-content">
@@ -86,6 +91,7 @@ const ServiceModal = ({ service, isOpen, onClose }) => {
 
             <div className="service-card-item kpis-card">
               <div className="card-header">
+                <span className="card-icon" aria-hidden="true">{React.createElement(sectionIcons['KPIs'])}</span>
                 <h3>KPIs</h3>
               </div>
               <div className="card-content">
