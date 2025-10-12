@@ -222,11 +222,25 @@ body {
 
 /* Services grid + cards */
 .services-grid {
-  display:flex; flex-wrap:wrap; justify-content:center;
-  gap:1.5rem; margin-top:2rem;
+  --services-gap: 1.5rem; /* adjust spacing between cards */
+  /* width of one card when 3-up */
+  --card-basis: calc((100% - 2 * var(--services-gap)) / 3);
+  display:flex; flex-direction:column; gap:var(--services-gap); margin-top:2rem;
+}
+.services-row { display:flex; gap:var(--services-gap); justify-content:center; align-items:stretch; }
+.services-row.three, .services-row.two { flex-wrap:nowrap; }
+/* ensure cards in both rows share the exact same width */
+.services-row .service-card { width: var(--card-basis); }
+
+/* responsive breakpoints */
+@media (max-width: 1024px) {
+  .services-grid { --card-basis: calc((100% - var(--services-gap)) / 2); }
+}
+@media (max-width: 700px) {
+  .services-grid { --card-basis: 100%; }
+  .services-row { flex-wrap:wrap; }
 }
 .service-card {
-  flex:1 1 320px; max-width:400px;
   background: #ffffff;
   border-radius:12px;
   padding:1.5rem 2rem;
@@ -256,6 +270,19 @@ body {
   border-left-color: var(--tech-blue);
 }
 .service-card p { margin:0.5rem 0; line-height:1.5; }
+
+/* Product-style visual tweaks */
+.product-card {
+  text-align:center;
+  padding:2rem;
+}
+.service-icon-wrap {
+  width:80px; height:80px; margin:0 auto 1rem;
+  display:grid; place-items:center; border-radius:16px;
+  background: linear-gradient(180deg, rgba(76, 175, 80, 0.06), rgba(33, 150, 243, 0.06));
+}
+.service-icon-wrap img { width:54px; height:54px; object-fit:contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,.08)); }
+.service-title { margin:0.25rem 0 0.5rem; font-size:1.1rem; color:var(--ink); }
 
 /* ===== Contact ===== */
 .contact {

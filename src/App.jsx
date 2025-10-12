@@ -187,41 +187,58 @@ export default function App() {
               </p> */}
             </motion.div>
 
-            {/* Cards grid */}
+            {/* Cards grid: first row 3, second row 2 (responsive) */}
             <motion.div
               className="services-grid"
               initial="hidden"
               animate="visible"
               variants={tableVariants}
             >
-              {servicesData.map((s, i) => (
-                <motion.div
-                  key={i}
-                  className="service-card clickable"
-                  variants={rowVariants}
-                  whileHover="hover"
-                  style={{ borderTop: `4px solid ${s.color}` }}
-                  onClick={() => handleServiceClick(s)}
-                >
-                  <h3>
-                    <img
-                      src={getServiceIconAsset(s.serviceArea)}
-                      alt=""
-                      aria-hidden="true"
-                      className="service-list-icon"
-                    />
-                    {s.serviceArea}
-                  </h3>
+              {/* Row 1: 3 cards */}
+              <motion.div className="services-row three" variants={tableVariants}>
+                {servicesData.slice(0, 3).map((s, i) => (
+                  <motion.article
+                    key={`r1-${i}`}
+                    className="service-card product-card clickable"
+                    variants={rowVariants}
+                    whileHover="hover"
+                    style={{ borderTop: `4px solid ${s.color}` }}
+                    onClick={() => handleServiceClick(s)}
+                  >
+                    <div className="service-icon-wrap" aria-hidden="true">
+                      <img src={getServiceIconAsset(s.serviceArea)} alt="" />
+                    </div>
+                    <h3 className="service-title">{s.serviceArea}</h3>
+                    <p className="service-preview">{s.shortDescription}</p>
+                    <div className="service-card-footer">
+                      <span className="click-hint">Click to learn more →</span>
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
 
-                  <p className="service-preview">
-                    {s.shortDescription}
-                  </p>
-                  
-                  <div className="service-card-footer">
-                    <span className="click-hint">Click to learn more →</span>
-                  </div>
-                </motion.div>
-              ))}
+              {/* Row 2: 2 cards */}
+              <motion.div className="services-row two" variants={tableVariants}>
+                {servicesData.slice(3).map((s, i) => (
+                  <motion.article
+                    key={`r2-${i}`}
+                    className="service-card product-card clickable"
+                    variants={rowVariants}
+                    whileHover="hover"
+                    style={{ borderTop: `4px solid ${s.color}` }}
+                    onClick={() => handleServiceClick(s)}
+                  >
+                    <div className="service-icon-wrap" aria-hidden="true">
+                      <img src={getServiceIconAsset(s.serviceArea)} alt="" />
+                    </div>
+                    <h3 className="service-title">{s.serviceArea}</h3>
+                    <p className="service-preview">{s.shortDescription}</p>
+                    <div className="service-card-footer">
+                      <span className="click-hint">Click to learn more →</span>
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
         </section>
