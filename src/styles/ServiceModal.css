@@ -5,7 +5,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  /* simple white blur over the page */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +40,8 @@
 
 /* Modal Header */
 .service-modal-header {
-  background: linear-gradient(135deg, #E5E7EB 0%, #F3F4F6 100%);
+  /* simple solid dark bluish green */
+  background: var(--modal-primary, #264653);
   color: #ffffff;
   padding: 1rem 1.5rem;
   display: flex;
@@ -49,9 +52,7 @@
   overflow: hidden;
 }
 
-.service-modal-header::before {
-  display: none;
-}
+.service-modal-header::before { display: none; }
 
 .service-modal-title {
   display: flex;
@@ -81,26 +82,26 @@
   display: none;
 }
 
+/* keep simple white title */
+.service-modal-title h2 { color: #ffffff; }
 .service-modal-title h2 {
   margin: 0;
   font-size: 1.4rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
   line-height: 1.2;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
+.service-project { color: rgba(255,255,255,0.9); }
 .service-project {
   margin: 0;
   font-size: 0.85rem;
-  opacity: 0.8;
+  opacity: 1;
   font-weight: 400;
-  color: var(--ink);
+  color: rgba(255,255,255,0.9);
   line-height: 1.3;
 }
 
@@ -129,9 +130,9 @@
 
 /* Back Button */
 .service-modal-back {
-  background: rgba(0, 0, 0, 0.1);
-  border: none;
-  color: var(--ink);
+  background: color-mix(in srgb, #ffffff 12%, transparent);
+  border: 1px solid color-mix(in srgb, #ffffff 30%, transparent);
+  color: #ffffff;
   font-size: 0.9rem;
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
@@ -144,9 +145,8 @@
   position: relative;
   z-index: 1;
 }
-
 .service-modal-back:hover {
-  background: rgba(0, 0, 0, 0.15);
+  background: color-mix(in srgb, #ffffff 18%, transparent);
   transform: translateX(-2px);
 }
 
@@ -157,24 +157,45 @@
 
 .service-modal-grid {
   display: grid;
-  grid-template-columns: 30% 40% 30%;
-  grid-template-rows: 1fr 1fr;
+  /* Requested layout: 5 columns x 5 rows grid */
+  /* Revert small adjustments */
+  grid-template-columns: 1.4fr 1.2fr 0.8fr 0.75fr 1.25fr;
+  grid-template-rows: repeat(5, auto);
   gap: 0.75rem;
   align-items: stretch;
   min-height: 500px;
 }
 
+/* Top-left logo inside the grid above Project */
+.service-grid-logo {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  display: grid;
+  place-items: center;
+  padding: 0.25rem 0.5rem;
+}
+.service-grid-logo img {
+  width: var(--grid-logo-size, clamp(48px, 6vw, 72px));
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12));
+  opacity: 0.9;
+}
+
+
 /* Service Cards */
 .service-card-item {
-  background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(255,255,255,0.95) 100%);
-  border: 1px solid rgba(230, 230, 230, 0.8);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+  border: 1px solid color-mix(in srgb, var(--modal-primary, #264653) 12%, #e6e6e6);
   border-radius: 12px;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 1.1rem;
   display: flex;
   flex-direction: column;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  position: relative;
 }
+/* remove accent bar for simple look */
+.service-card-item::before { display: none; }
 
 .service-card-item:hover {
   transform: translateY(-2px);
@@ -182,30 +203,19 @@
 }
 
 /* Grid positioning */
-.project-card {
-  grid-column: 1;
-  grid-row: 1 / 3;
-}
-
-.objective-card {
-  grid-column: 3;
-  grid-row: 1;
-}
-
-.deliverables-card {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.workflow-card {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.kpis-card {
-  grid-column: 3;
-  grid-row: 2;
-}
+/*
+  Mapping per user's example (numbered blocks):
+  2 -> Project:      row-span-4 col-start-1 row-start-2
+  3 -> Objective:    row-span-2 col-start-2 row-start-1
+  4 -> Deliverables: col-span-3 row-span-2 col-start-3 row-start-1
+  5 -> Workflow:     col-span-3 row-span-3 col-start-2 row-start-3
+  6 -> KPIs:         row-span-3 col-start-5 row-start-3
+*/
+.project-card { grid-column: 1 / 2; grid-row: 2 / 6; }
+.objective-card { grid-column: 2 / 3; grid-row: 1 / 3; }
+.deliverables-card { grid-column: 3 / 6; grid-row: 1 / 3; }
+.workflow-card { grid-column: 2 / 5; grid-row: 3 / 6; }
+.kpis-card { grid-column: 5 / 6; grid-row: 3 / 6; }
 
 /* Card Headers */
 .card-header {
@@ -219,15 +229,10 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--bio-green);
+  color: var(--modal-primary, #264653);
 }
 
-.card-icon {
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
-  color: var(--bio-green);
-  font-weight: bold;
-}
+.card-icon { font-size: 1.2rem; margin-right: 0.5rem; color: var(--modal-secondary, #2A9D8F); font-weight: bold; }
 
 /* Header service area icon */
 .service-area-icon-img {
@@ -238,7 +243,7 @@
 .service-area-icon { /* react-icons fallback */
   /* Responsive font-size: min 1rem, scales with viewport, max 1.5rem */
   font-size: clamp(1rem, 2.2vw, 1.5rem);
-  color: var(--bio-green);
+  color: var(--modal-primary, #2A9D8F);
 }
 .service-area-text { display: inline-block; }
 
@@ -258,10 +263,7 @@
   font-weight: 450;
 }
 
-.card-content ul {
-  margin: 0.5rem 0;
-  padding-left: 1.2rem;
-}
+.card-content ul { margin: 0.5rem 0; padding-left: 1.2rem; }
 
 .card-content li {
   margin-bottom: 0.4rem;
@@ -271,12 +273,12 @@
 
 .card-content strong {
   font-weight: 600;
-  color: var(--bio-green);
+  color: var(--modal-primary, #264653);
 }
 
 /* Modal Footer */
 .service-modal-footer {
-  background: linear-gradient(135deg, #f8f9fa 0%, rgba(250, 250, 250, 0.95) 100%);
+  background: linear-gradient(135deg, #f7faf9 0%, #ffffff 100%);
   padding: 1rem 2rem;
   display: flex;
   gap: 1rem;
@@ -284,6 +286,16 @@
   border-top: 1px solid rgba(220, 220, 220, 0.3);
   border-radius: 0 0 16px 16px;
 }
+.service-modal-footer .btn-primary { background: var(--modal-primary, #264653); color: #fff; }
+.service-modal-footer .btn-primary:hover { background: color-mix(in srgb, var(--modal-primary, #264653) 85%, white); }
+.service-modal-footer .btn-secondary { background: var(--modal-secondary, #2A9D8F); color: #fff; }
+.service-modal-footer .btn-secondary:hover { background: color-mix(in srgb, var(--modal-secondary, #2A9D8F) 85%, white); }
+
+/* Accent border to separate header and body */
+.service-modal-header { border-bottom: 3px solid color-mix(in srgb, var(--modal-primary, #264653) 20%, transparent); }
+/* Subtle colored borders on modal inner cards */
+.service-card-item { border: 1px solid color-mix(in srgb, var(--modal-primary, #264653) 14%, #e6e6e6); }
+.service-card-item:hover { box-shadow: 0 10px 28px color-mix(in srgb, var(--modal-primary, #264653) 16%, rgba(0,0,0,0.12)); }
 
 /* Keyboard focus visibility inside modal */
 .service-card-item:focus-within {
@@ -304,16 +316,14 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .service-modal-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  /* Two-column layout without overlaps */
-  .project-card { grid-column: 1; grid-row: 1 / 3; }
-  .deliverables-card { grid-column: 2; grid-row: 1; }
-  .workflow-card { grid-column: 2; grid-row: 2; }
-  .objective-card { grid-column: 1 / -1; grid-row: 3; }
-  .kpis-card { grid-column: 1 / -1; grid-row: 4; }
+  .service-modal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .service-grid-logo { display: none; }
+  /* collapse into two columns stacked */
+  .project-card { grid-column: 1 / 2; grid-row: auto; }
+  .objective-card { grid-column: 2 / 3; grid-row: auto; }
+  .deliverables-card { grid-column: 1 / -1; grid-row: auto; }
+  .workflow-card { grid-column: 1 / -1; grid-row: auto; }
+  .kpis-card { grid-column: 1 / -1; grid-row: auto; }
 }
 
 @media (max-width: 768px) {

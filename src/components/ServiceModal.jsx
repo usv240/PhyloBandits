@@ -3,20 +3,26 @@ import '../styles/ServiceModal.css';
 import logo from '../assets/PhyloBandits_Logo_Transparent_Cut.png';
 import { sectionIcons } from '../utils/iconMap';
 
-const ServiceModal = ({ service, isOpen, onClose }) => {
+const ServiceModal = ({ service, isOpen, onClose, theme }) => {
   if (!isOpen || !service) return null;
 
   return (
     <div className="service-modal-overlay" onClick={onClose}>
-      <div className="service-modal-content" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="service-modal-content"
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          "--modal-primary": theme?.primary || '#4CAF50',
+          "--modal-secondary": theme?.secondary || '#2196F3'
+        }}
+      >
         {/* Modal Header */}
-        <div className="service-modal-header">
+  <div className="service-modal-header">
           <button className="service-modal-back" onClick={onClose}>
             ← Back
           </button>
           
           <div className="service-modal-title">
-            <img src={logo} alt="PhyloBandits" className="service-modal-logo" />
             <div className="service-title-text">
               <h2>{service.serviceArea}</h2>
               <p className="service-project">{service.project}</p>
@@ -29,8 +35,12 @@ const ServiceModal = ({ service, isOpen, onClose }) => {
         </div>
 
         {/* Modal Body - Grid Layout */}
-        <div className="service-modal-body">
+          <div className="service-modal-body">
           <div className="service-modal-grid">
+            {/* Top-left grid logo above Project (restored) */}
+            <div className="service-grid-logo" aria-hidden="true">
+              <img src={logo} alt="PhyloBandits" />
+            </div>
             
             {/* Row 1: Objective + Deliverables */}
             <div className="service-card-item objective-card">

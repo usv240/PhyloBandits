@@ -5,11 +5,11 @@ import { GiDna1 } from 'react-icons/gi';
 import { LuBrainCircuit } from 'react-icons/lu';
 
 // Local SVG assets for service icons
-import DNAIcon from '../assets/DNA_double_helix.svg';
-import RNAIcon from '../assets/rna.svg';
-import GutIcon from '../assets/gut_bacteria.svg';
-import MagnifyIcon from '../assets/magnifying-glass.svg';
-import AIIcon from '../assets/ai.svg';
+import DNAIcon from '../assets/DNA_double_helix.png';
+import RNAIcon from '../assets/rna.png';
+import GutIcon from '../assets/gut_bacteria.png';
+import MagnifyIcon from '../assets/magnifying-glass.png';
+import AIIcon from '../assets/ai.png';
 
 // Map service area keywords to React Icon components (used in modal headers/section icons)
 export function getServiceIcon(serviceArea = '') {

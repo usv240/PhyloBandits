@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
@@ -40,8 +40,16 @@ export default function App() {
   const [selectedService, setSelectedService] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleServiceClick = (service) => {
-    setSelectedService(service);
+  // Global theme (same for all service tiles + modal)
+  // Based on the provided palette "Sunny Beach Day"
+  const globalTheme = { primary: "#2A9D8F", secondary: "#E9C46A" };
+  // Modal-specific theme using Sunny Beach palette: dark base + subtle green accent
+  // primary: #264653 (deep blue-teal), secondary: #2A9D8F (teal/green)
+  const modalTheme = { primary: "#264653", secondary: "#2A9D8F" };
+
+  const handleServiceClick = (service, theme) => {
+    const themed = { ...service, _theme: theme };
+    setSelectedService(themed);
     setIsModalOpen(true);
   };
 
@@ -49,6 +57,41 @@ export default function App() {
     setIsModalOpen(false);
     setSelectedService(null);
   };
+
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    let scrollY = 0;
+    const body = document.body;
+    if (isModalOpen) {
+      scrollY = window.scrollY || window.pageYOffset;
+      body.dataset.scrollY = String(scrollY);
+      body.style.position = 'fixed';
+      body.style.top = `-${scrollY}px`;
+      body.style.left = '0';
+      body.style.right = '0';
+      body.style.width = '100%';
+      body.style.overflow = 'hidden';
+    } else {
+      const prev = Number(body.dataset.scrollY || 0);
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      body.style.overflow = '';
+      window.scrollTo(0, prev);
+      delete body.dataset.scrollY;
+    }
+    return () => {
+      // ensure cleanup in case component unmounts with modal open
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      body.style.overflow = '';
+    };
+  }, [isModalOpen]);
 
   return (
     <>
@@ -196,14 +239,16 @@ export default function App() {
             >
               {/* Row 1: 3 cards */}
               <motion.div className="services-row three" variants={tableVariants}>
-                {servicesData.slice(0, 3).map((s, i) => (
+                {servicesData.slice(0, 3).map((s, i) => {
+                  const theme = globalTheme;
+                  return (
                   <motion.article
                     key={`r1-${i}`}
                     className="service-card product-card clickable"
                     variants={rowVariants}
                     whileHover="hover"
-                    style={{ borderTop: `4px solid ${s.color}` }}
-                    onClick={() => handleServiceClick(s)}
+                    style={{ borderTop: `4px solid ${theme.primary}`, "--svc-primary": theme.primary, "--svc-secondary": theme.secondary }}
+                    onClick={() => handleServiceClick(s, theme)}
                   >
                     <div className="service-icon-wrap" aria-hidden="true">
                       <img src={getServiceIconAsset(s.serviceArea)} alt="" />
@@ -214,19 +259,22 @@ export default function App() {
                       <span className="click-hint">Click to learn more →</span>
                     </div>
                   </motion.article>
-                ))}
+                  );
+                })}
               </motion.div>
 
               {/* Row 2: 2 cards */}
               <motion.div className="services-row two" variants={tableVariants}>
-                {servicesData.slice(3).map((s, i) => (
+                {servicesData.slice(3).map((s, i) => {
+                  const theme = globalTheme;
+                  return (
                   <motion.article
                     key={`r2-${i}`}
                     className="service-card product-card clickable"
                     variants={rowVariants}
                     whileHover="hover"
-                    style={{ borderTop: `4px solid ${s.color}` }}
-                    onClick={() => handleServiceClick(s)}
+                    style={{ borderTop: `4px solid ${theme.primary}`, "--svc-primary": theme.primary, "--svc-secondary": theme.secondary }}
+                    onClick={() => handleServiceClick(s, theme)}
                   >
                     <div className="service-icon-wrap" aria-hidden="true">
                       <img src={getServiceIconAsset(s.serviceArea)} alt="" />
@@ -237,7 +285,8 @@ export default function App() {
                       <span className="click-hint">Click to learn more →</span>
                     </div>
                   </motion.article>
-                ))}
+                  );
+                })}
               </motion.div>
             </motion.div>
           </div>
@@ -310,6 +359,7 @@ export default function App() {
       {/* ============ SERVICE MODAL ============ */}
       <ServiceModal 
         service={selectedService}
+        theme={modalTheme}
         isOpen={isModalOpen}
         onClose={closeModal}
       />
