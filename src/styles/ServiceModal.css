@@ -1,4 +1,50 @@
+/*
+  Service Modal (Service "pop") Stylesheet
+  -------------------------------------------------------------
+  Used by: src/components/ServiceModal.jsx
+  Import:  import '../styles/ServiceModal.css'
+
+  DOM outline (for quick mapping):
+  .service-modal-overlay                 // page overlay (blurred white)
+    .service-modal-content               // modal box container (rounded, scrollable)
+      .service-modal-header              // top header (brand-colored)
+        .service-modal-back              // back/close button (left)
+        .service-modal-title             // centered title block
+          .service-title-text
+            h2.service-area              // service area title
+            p.service-project            // project subtitle
+        .service-modal-close             // close button (right)
+
+      .service-modal-body                // content wrapper (padding)
+        .service-modal-grid              // 5x5 grid layout
+          .service-grid-logo img         // top-left logo cell
+          .service-card-item.objective-card
+            .card-header (.card-icon + h3)
+            .card-content (p)
+          .service-card-item.deliverables-card
+            .card-header (.card-icon + h3)
+            .card-content (ul > li)
+          .service-card-item.project-card
+            .card-header (.card-icon + h3)
+            .card-content (p/ul/strong)
+          .service-card-item.workflow-card
+            .card-header (.card-icon + h3)
+            .card-content (ul > li)
+          .service-card-item.kpis-card
+            .card-header (.card-icon + h3)
+            .card-content (ul > li)
+
+      .service-modal-footer              // action buttons area (Close / Get Started)
+
+  Theming variables (set inline via style prop on .service-modal-content):
+  --modal-primary   // main brand color for header and primary elements
+  --modal-secondary // secondary accent color (used for footer button)
+  --bio-green       // base green used to derive tile backgrounds
+*/
 /* Service Modal Styles */
+/*
+  Overlay: full-screen layer behind the modal, dims/softens the page
+*/
 .service-modal-overlay {
   position: fixed;
   top: 0;
@@ -15,6 +61,9 @@
   padding: 1rem;
 }
 
+/*
+  Modal container: the white rounded box holding header, grid, and footer
+*/
 .service-modal-content {
   background: #ffffff;
   border-radius: 16px;
@@ -38,7 +87,9 @@
   }
 }
 
-/* Modal Header */
+/*
+  Header: solid brand-colored banner with centered title and left/right actions
+*/
 .service-modal-header {
   /* simple solid dark bluish green */
   background: var(--modal-primary, #264653);
@@ -54,6 +105,7 @@
 
 .service-modal-header::before { display: none; }
 
+/* Title block: centers the service area and project text */
 .service-modal-title {
   display: flex;
   align-items: center;
@@ -62,40 +114,30 @@
   justify-content: center;
 }
 
-.service-modal-logo {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
 
+/* Container for h2 (service area) and project subtitle */
 .service-title-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.service-logo-bg {
-  display: none;
-}
+/* (Reserved for future decorative logo elements near the title) */
 
-.modal-logo {
-  display: none;
-}
-
-/* keep simple white title */
-.service-modal-title h2 { color: #ffffff; }
+/* Ensure the title text color; configurable via --modal-title-color */
 .service-modal-title h2 {
   margin: 0;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--modal-title-color, #ffffff);
   line-height: 1.2;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.service-project { color: rgba(255,255,255,0.9); }
+/* Subtitle: the project name under the title */
+.service-project { color: var(--tech-blue); }
 .service-project {
   margin: 0;
   font-size: 0.85rem;
@@ -105,10 +147,12 @@
   line-height: 1.3;
 }
 
+/* Close (X) button at the right side of the header */
 .service-modal-close {
-  background: rgba(0, 0, 0, 0.1);
-  border: none;
-  color: var(--ink);
+  /* Match BACK button styling */
+  background: color-mix(in srgb, #ffffff 12%, transparent);
+  border: 1px solid color-mix(in srgb, #ffffff 30%, transparent);
+  color: #ffffff;
   font-size: 1.4rem;
   padding: 0.4rem;
   border-radius: 50%;
@@ -124,11 +168,11 @@
 }
 
 .service-modal-close:hover {
-  background: rgba(0, 0, 0, 0.15);
+  background: color-mix(in srgb, #ffffff 18%, transparent);
   transform: rotate(90deg);
 }
 
-/* Back Button */
+/* Back button at the left side of the header */
 .service-modal-back {
   background: color-mix(in srgb, #ffffff 12%, transparent);
   border: 1px solid color-mix(in srgb, #ffffff 30%, transparent);
@@ -150,11 +194,14 @@
   transform: translateX(-2px);
 }
 
-/* Modal Body */
+/* Body: padding wrapper for the grid */
 .service-modal-body {
   padding: 2rem 2.5rem;
 }
 
+/*
+  Grid: 5 columns x 5 rows. Specific placements below map to the reference layout.
+*/
 .service-modal-grid {
   display: grid;
   /* Requested layout: 5 columns x 5 rows grid */
@@ -166,7 +213,7 @@
   min-height: 500px;
 }
 
-/* Top-left logo inside the grid above Project */
+/* Top-left logo cell inside the grid (above the Project card) */
 .service-grid-logo {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
@@ -182,11 +229,15 @@
 }
 
 
-/* Service Cards */
+/*
+  Card tiles: green product-like tiles with rounded corners and subtle hover elevation
+*/
 .service-card-item {
-  background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
-  border: 1px solid color-mix(in srgb, var(--modal-primary, #264653) 12%, #e6e6e6);
-  border-radius: 12px;
+  /* Match service card title green exactly */
+  --tile-green: var(--bio-green, #4CAF50);
+  background: var(--tile-green);
+  border: 1px solid color-mix(in srgb, var(--tile-green) 65%, black);
+  border-radius: 20px;
   padding: 1rem 1.2rem 1.1rem;
   display: flex;
   flex-direction: column;
@@ -199,10 +250,17 @@
 
 .service-card-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--tile-green) 28%, rgba(0,0,0,0.12));
 }
 
-/* Grid positioning */
+/*
+  Grid positioning (mapping to reference diagram):
+  2 -> Project:      row-span-4 col-start-1 row-start-2
+  3 -> Objective:    row-span-2 col-start-2 row-start-1
+  4 -> Deliverables: col-span-3 row-span-2 col-start-3 row-start-1
+  5 -> Workflow:     col-span-3 row-span-3 col-start-2 row-start-3
+  6 -> KPIs:         row-span-3 col-start-5 row-start-3
+*/
 /*
   Mapping per user's example (numbered blocks):
   2 -> Project:      row-span-4 col-start-1 row-start-2
@@ -217,7 +275,7 @@
 .workflow-card { grid-column: 2 / 5; grid-row: 3 / 6; }
 .kpis-card { grid-column: 5 / 6; grid-row: 3 / 6; }
 
-/* Card Headers */
+/* Card headers row: left icon + title */
 .card-header {
   display: flex;
   align-items: center;
@@ -229,31 +287,21 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--modal-primary, #264653);
+  color: var(--ink);
 }
 
-.card-icon { font-size: 1.2rem; margin-right: 0.5rem; color: var(--modal-secondary, #2A9D8F); font-weight: bold; }
+/* Icon inside the card header (from react-icons) */
+.card-icon { font-size: 1.2rem; margin-right: 0.5rem; color: var(--ink); font-weight: bold; }
 
-/* Header service area icon */
-.service-area-icon-img {
-  /* Responsive size: min 20px, scales with viewport, max ~28px */
-  width: clamp(25px, 2.2vw, 35px);
-  height: clamp(25px, 2.2vw, 35px);
-}
-.service-area-icon { /* react-icons fallback */
-  /* Responsive font-size: min 1rem, scales with viewport, max 1.5rem */
-  font-size: clamp(1rem, 2.2vw, 1.5rem);
-  color: var(--modal-primary, #2A9D8F);
-}
-.service-area-text { display: inline-block; }
+/* (removed unused service-area icon helper classes) */
 
-/* Card Content */
+/* Card content body: paragraphs, lists, etc. */
 .card-content {
   flex: 1;
-  color: var(--tech-blue);
+  color: var(--ink);
   line-height: 1.5;
   font-size: 0.95rem;
-  font-weight: 450;
+  font-weight: 500;
   min-height: 0;
   overflow: auto;
 }
@@ -263,20 +311,25 @@
   font-weight: 450;
 }
 
+/* Unordered lists inside cards */
 .card-content ul { margin: 0.5rem 0; padding-left: 1.2rem; }
 
+/* List items inside cards */
 .card-content li {
   margin-bottom: 0.4rem;
   font-size: 0.95rem;
   font-weight: 450;
 }
 
+/* Emphasis text inside cards */
 .card-content strong {
-  font-weight: 600;
-  color: var(--modal-primary, #264653);
+  font-weight: 700;
+  color: var(--ink);
 }
 
-/* Modal Footer */
+/*
+  Footer: action buttons area (Close / Get Started)
+*/
 .service-modal-footer {
   background: linear-gradient(135deg, #f7faf9 0%, #ffffff 100%);
   padding: 1rem 2rem;
@@ -286,16 +339,18 @@
   border-top: 1px solid rgba(220, 220, 220, 0.3);
   border-radius: 0 0 16px 16px;
 }
+/* Buttons scoped to footer to avoid global leakage */
 .service-modal-footer .btn-primary { background: var(--modal-primary, #264653); color: #fff; }
 .service-modal-footer .btn-primary:hover { background: color-mix(in srgb, var(--modal-primary, #264653) 85%, white); }
-.service-modal-footer .btn-secondary { background: var(--modal-secondary, #2A9D8F); color: #fff; }
-.service-modal-footer .btn-secondary:hover { background: color-mix(in srgb, var(--modal-secondary, #2A9D8F) 85%, white); }
+.service-modal-footer .btn-secondary { background: var(--bio-green, #c6dbc7); color: #fff; }
+.service-modal-footer .btn-secondary:hover { background: var(--tech-blue, #2196F3); }
 
 /* Accent border to separate header and body */
 .service-modal-header { border-bottom: 3px solid color-mix(in srgb, var(--modal-primary, #264653) 20%, transparent); }
 /* Subtle colored borders on modal inner cards */
-.service-card-item { border: 1px solid color-mix(in srgb, var(--modal-primary, #264653) 14%, #e6e6e6); }
-.service-card-item:hover { box-shadow: 0 10px 28px color-mix(in srgb, var(--modal-primary, #264653) 16%, rgba(0,0,0,0.12)); }
+/* Ensure borders and hovers use tile green instead of teal */
+.service-card-item { border: 1px solid color-mix(in srgb, var(--tile-green) 45%, #ffffff); }
+.service-card-item:hover { box-shadow: 0 10px 28px color-mix(in srgb, var(--tile-green) 28%, rgba(0,0,0,0.12)); }
 
 /* Keyboard focus visibility inside modal */
 .service-card-item:focus-within {
@@ -351,6 +406,31 @@
     padding: 1.5rem;
     flex-direction: row;
     align-items: center;
+    position: relative; /* enable absolute positioning for header controls */
+  }
+  /* Pin Back and Close to the top corners for consistent alignment */
+  .service-modal-back {
+    position: absolute;
+    top: 18px;
+    left: 12px;
+  }
+  .service-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  /* Slightly smaller Back button on mobile */
+  .service-modal-back {
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.6rem !important; /* slightly taller for better match with X */
+    line-height: 1 !important;
+    border-radius: 6px !important;
+    border-width: 1px !important;
+  }
+  /* Add side padding to title so buttons don’t overlap long/multi-line titles */
+  .service-modal-title {
+    padding: 0 3.5rem; /* space for back/close buttons on both sides */
+    justify-content: center;
   }
   
   .service-modal-body {

@@ -1,29 +1,4 @@
-/* ===== Design tokens ===== */
-:root {
-  /* Logo-inspired colors */
-  --bio-green: #4CAF50;         /* Biology/phylo green */
-  --tech-blue: #2196F3;         /* Technology/bandits blue */
-  --gradient-bio-tech: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
-  --gradient-tech-bio: linear-gradient(135deg, #2196F3 0%, #4CAF50 100%);
-  
-  /* Semantic colors */
-  --brand-bg: #f0f8f5;          /* Light green-tinted background */
-  --ink: #1a3d2e;               /* Dark green-tinted text */
-  --deep: #0d2818;              /* Deep green for emphasis */
-  --accent-primary: var(--bio-green);
-  --accent-secondary: var(--tech-blue);
-  
-  /* Soft versions */
-  --bio-green-soft: #81C784;    /* Lighter green */
-  --tech-blue-soft: #64B5F6;    /* Lighter blue */
-  --bio-green-ghost: #E8F5E8;   /* Very light green */
-  --tech-blue-ghost: #E3F2FD;   /* Very light blue */
-
-  /* Legacy compatibility */
-  --teal: var(--bio-green);
-  --teal-ghost: var(--bio-green-ghost);
-  --teal-soft: var(--bio-green-soft);
-}
+/* Tokens are imported from styles/tokens.css */
 
 /* ===== Page scaffold ===== */
 html,body,#root { height:100%; }
@@ -121,72 +96,15 @@ body {
   background: var(--gradient-bio-tech);
 }
 
-.hero-grid { display:flex; align-items:center; justify-content:space-between; width:100%; z-index:1; }
 @media(max-width:900px){
   .hero { flex-direction:column; border-radius:0 0 60px 60px; padding:4rem 1rem; min-height:auto; }
-  .hero-grid { flex-direction:column; text-align:center; }
 }
+@media(min-width:1600px){ .hero{ padding-inline:4rem; } }
 
-.hero-text { max-width:600px; color:var(--deep); }
-.hero-text h1 {
-  font-size:3.2rem; margin:0 0 1rem; font-weight:900;
-  letter-spacing:-1px; line-height:1.1;
-  text-shadow:0 2px 4px rgba(2,54,57,.1);
-}
-.hero-text p { font-size:1.3rem; line-height:1.5; margin:0 0 2rem; font-weight:500; }
-@media(max-width:900px){
-  .hero-text{ max-width:100%; }
-  .hero-text h1{ font-size:2.5rem; }
-  .hero-text p{ font-size:1.1rem; }
-}
-@media(max-width:599px){ .hero-text h1{ font-size:1.9rem; } .hero-text p{ font-size:1rem; } }
-@media(max-width:480px){ .hero-text h1{ font-size:2rem; } }
-@media(min-width:1600px){ .hero{ padding-inline:4rem; } .hero-text h1{ font-size:3.8rem; } }
+/* (removed unused .hero-cta styles) */
 
-.hero-cta-link { text-decoration:none; }
-.hero-cta {
-  background:var(--deep);
-  color:#ffffff;
-  font-weight:700;
-  padding:15px 42px;
-  border-radius:50px;
-  font-size:1.1rem;
-  box-shadow:0 8px 15px rgba(13,40,24,.56);
-  transition:.3s;
-  display:inline-block;
-  position:relative;
-  overflow:hidden;
-}
-.hero-cta::before {
-  content:""; position:absolute; inset:0;
-  background:var(--bio-green); z-index:-1;
-  transform:scaleX(0); transform-origin:right;
-  transition:transform .4s ease;
-}
-.hero-cta:hover::before { transform:scaleX(1); transform-origin:left; }
-.hero-cta:hover { box-shadow:0 12px 24px rgba(76,175,80,.6); }
+/* (removed unused .hero-image styles) */
 
-.hero-image {
-  max-width:clamp(180px, 45vw, 420px);
-  filter:drop-shadow(0 4px 12px rgba(13,40,24,.25));
-  animation:floatY 6s ease-in-out infinite;
-}
-@keyframes floatY { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-15px) } }
-@media(max-width:900px){ .hero-image{ margin-top:2.7rem; width:100%; max-width:400px; } }
-
-/* Decorative DNA icons */
-.dna-icon {
-  position:absolute; width:100px; height:150px; opacity:.1; z-index:0;
-  background:url("data:image/svg+xml,%3Csvg width='100' height='150' viewBox='0 0 100 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 5v10M30 25v10M70 25v10M50 45v10M30 65v10M70 65v10M50 85v10M30 105v10M70 105v10M50 125v10' stroke='%234CAF50' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M50 5c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0zM50 45c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0zM50 85c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0zM50 125c-10 10-20 20-20 20s20 0 40 0 20-10 20-10-10-10-20-10-20 0-20 0z' fill='none' stroke='%234CAF50' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat;
-  animation:dnaFloat 8s ease-in-out infinite;
-}
-@keyframes dnaFloat {
-  0%{ transform:translateY(0) rotate(0deg); }
-  25%{ transform:translateY(-10px) rotate(5deg); }
-  50%{ transform:translateY(0) rotate(0deg); }
-  75%{ transform:translateY(10px) rotate(-5deg); }
-  100%{ transform:translateY(0) rotate(0deg); }
-}
 
 /* ===== Services ===== */
 .services {
@@ -239,6 +157,11 @@ body {
 @media (max-width: 700px) {
   .services-grid { --card-basis: 100%; }
   .services-row { flex-wrap:wrap; }
+  /* Override row variants that force nowrap so cards can stack */
+  .services-row.three,
+  .services-row.two { flex-wrap: wrap; }
+  /* Make each card occupy full width for consistent sizing */
+  .services-row .service-card { width: 100%; flex: 1 1 100%; }
 }
 .service-card {
   background: #ffffff;
@@ -257,13 +180,7 @@ body {
   display:flex;
   align-items:center;
 }
-.service-list-icon {
-  width: clamp(28px, 3.2vw, 45px);
-  height: clamp(28px, 3.2vw, 45px);
-  margin-right: 8px;
-  display: inline-block;
-  flex-shrink: 0;
-}
+/* (removed unused .service-list-icon) */
 .service-card:hover { 
   transform:translateY(-4px); 
   box-shadow:0 8px 20px rgba(0,0,0,.12);
@@ -295,9 +212,18 @@ body {
   object-fit:contain;
   filter: drop-shadow(0 4px 10px rgba(0,0,0,.08));
 }
-.service-title { margin:0.25rem 0 0.5rem; font-size:1.1rem; color: var(--svc-primary, var(--ink)); }
-.service-card.product-card { border-top-color: var(--svc-primary, #2A9D8F) !important; }
-.service-card.product-card:hover { border-left-color: var(--svc-primary, #2A9D8F); }
+/* Service card title (specific to override the generic `.service-card h3` color) */
+.service-card .service-title {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.1rem;
+  color: var(--svc-title-color, #2A9D8F); /* default brand teal; override with --svc-title-color if needed */
+}
+.service-card.product-card {
+  /* Make top border match the left grey border */
+  border-top: 3px solid #666666 !important;
+}
+/* Keep left border grey on hover */
+.service-card.product-card:hover { border-left-color: #666666; }
 .service-card .click-hint { color: var(--svc-primary, #2A9D8F); }
 
 /* ===== Contact ===== */
@@ -363,32 +289,6 @@ body {
   height:3px; background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0.5), #ffffff);
 }
 
-/* ===== Tables (for older services view) ===== */
-.bt-table { width:100%; border-collapse:collapse; margin:1rem 0; }
-.bt-table th, .bt-table td { padding:12px 15px; text-align:left; border-bottom:1px solid #ddd; }
-.bt-table th { background:var(--bio-green); color:#fff; font-weight:600; position:sticky; top:0; }
-.bt-table tr:nth-child(even){ background:var(--bio-green-ghost); }
-.bt-table tr:hover{ background:rgba(76, 175, 80, 0.1); }
-.bt-table-wrapper{ width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-
-/* ===== Responsive table → card ===== */
-@media(max-width:767px){
-  .bt-table thead{ display:none; }
-  .bt-table, .bt-table tbody, .bt-table tr, .bt-table td { display:block; width:100%; }
-  .bt-table tr {
-    margin:0 0 1.4rem; background:#fff;
-    border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.06);
-    padding:.5rem 0;
-  }
-  .bt-table td {
-    padding:.7rem 1rem; border:none; font-size:.95rem;
-  }
-  .bt-table td::before {
-    content:attr(data-label);
-    display:block; font-weight:600; color:var(--bio-green);
-    margin-bottom:.2rem;
-  }
-}
 .hero,
 .services,
 .contact,
@@ -497,8 +397,8 @@ body {
   outline-offset: 4px;
 }
 
-.service-preview {
-  color: var(--tech-blue);
+.service-card .service-preview {
+  color: var(--svc-preview-color, var(--tech-blue));
   font-size: 0.95rem;
   line-height: 1.5;
   font-weight: 450;

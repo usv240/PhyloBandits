@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
+import "./styles/tokens.css";
 import "./App.css";
 import servicesData from "./servicesData.json";
 import { getServiceIconAsset } from "./utils/iconMap";
-//import heroLogo from "./assets/PhyloBandits_logo.png";          // big illustrated hero graphic
 import heroLogo from "./assets/PhyloBandits_Logo_Transparent_Cut.png"
-//import logo from "./assets/PhyloBandits_logo_NOTEXT.png";       // small icon for navbar
 import logo from "./assets/PhyloBandits_Logo_Transparent_Cut.png";
 import MoleculeBackground from "./components/MoleculeBackground";
 import ServiceModal from "./components/ServiceModal";
@@ -247,7 +246,7 @@ export default function App() {
                     className="service-card product-card clickable"
                     variants={rowVariants}
                     whileHover="hover"
-                    style={{ borderTop: `4px solid ${theme.primary}`, "--svc-primary": theme.primary, "--svc-secondary": theme.secondary }}
+                    style={{ "--svc-primary": theme.primary, "--svc-secondary": theme.secondary }}
                     onClick={() => handleServiceClick(s, theme)}
                   >
                     <div className="service-icon-wrap" aria-hidden="true">
@@ -273,7 +272,7 @@ export default function App() {
                     className="service-card product-card clickable"
                     variants={rowVariants}
                     whileHover="hover"
-                    style={{ borderTop: `4px solid ${theme.primary}`, "--svc-primary": theme.primary, "--svc-secondary": theme.secondary }}
+                    style={{ "--svc-primary": theme.primary, "--svc-secondary": theme.secondary }}
                     onClick={() => handleServiceClick(s, theme)}
                   >
                     <div className="service-icon-wrap" aria-hidden="true">

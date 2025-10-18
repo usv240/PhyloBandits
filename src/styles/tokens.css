@@ -1,0 +1,30 @@
+/* ===== Design tokens (global) ===== */
+:root {
+  /* Logo-inspired colors */
+  --bio-green: #4CAF50;         /* Biology/phylo green */
+  --tech-blue: #2196F3;         /* Technology/bandits blue */
+  --gradient-bio-tech: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  --gradient-tech-bio: linear-gradient(135deg, #2196F3 0%, #4CAF50 100%);
+  
+  /* Semantic colors */
+  --brand-bg: #f0f8f5;          /* Light green-tinted background */
+  --ink: #1a3d2e;               /* Dark green-tinted text */
+  --deep: #0d2818;              /* Deep green for emphasis */
+  --accent-primary: var(--bio-green);
+  --accent-secondary: var(--tech-blue);
+  
+  /* Soft versions */
+  --bio-green-soft: #81C784;    /* Lighter green */
+  --tech-blue-soft: #64B5F6;    /* Lighter blue */
+  --bio-green-ghost: #E8F5E8;   /* Very light green */
+  --tech-blue-ghost: #E3F2FD;   /* Very light blue */
+
+  /* Legacy compatibility */
+  --teal: var(--bio-green);
+  --teal-ghost: var(--bio-green-ghost);
+  --teal-soft: var(--bio-green-soft);
+
+  /* Service cards: title/preview colors (homepage grid) */
+  --svc-title-color: var(--bio-green);   /* Title: green */
+  --svc-preview-color: var(--tech-blue); /* Preview: blue */
+}

@@ -15,9 +15,10 @@ import AIIcon from '../assets/ai.png';
 export function getServiceIcon(serviceArea = '') {
   const s = serviceArea.toLowerCase();
 
+  // Prioritize microbiome before generic genomic to avoid matching 'metagenomics' as 'genomic'
+  if (s.includes('microbiome') || s.includes('metagenomic') || s.includes('microbiota') || s.includes('gut')) return MdBiotech;
   if (s.includes('genomic') || s.includes('comparative') || s.includes('dna')) return GiDna1;
   if (s.includes('transcript') || s.includes('rna') || s.includes('functional')) return MdOutlineInsights;
-  if (s.includes('microbiome') || s.includes('metagenomic') || s.includes('microbiota') || s.includes('gut')) return MdBiotech;
   if (s.includes('molecular') || s.includes('drug') || s.includes('modeling') || s.includes('magnifying')) return MdWorkOutline;
   if (s.includes('systems') || s.includes('ai')) return LuBrainCircuit;
 
@@ -36,9 +37,10 @@ export const sectionIcons = {
 // Map service area to local SVG asset for main list and modal header image
 export function getServiceIconAsset(serviceArea = '') {
   const s = serviceArea.toLowerCase();
+  // Prioritize microbiome before generic genomic to avoid matching 'metagenomics' as 'genomic'
+  if (s.includes('microbiome') || s.includes('metagenomic') || s.includes('gut')) return GutIcon;
   if (s.includes('genomic') || s.includes('comparative') || s.includes('dna')) return DNAIcon;
   if (s.includes('transcript') || s.includes('rna') || s.includes('functional')) return RNAIcon;
-  if (s.includes('microbiome') || s.includes('metagenomic') || s.includes('gut')) return GutIcon;
   if (s.includes('molecular') || s.includes('drug') || s.includes('magnifying')) return MagnifyIcon;
   if (s.includes('systems') || s.includes('ai')) return AIIcon;
   return AIIcon; // default fallback
